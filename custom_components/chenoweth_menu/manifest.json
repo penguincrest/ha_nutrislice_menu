@@ -1,0 +1,11 @@
+{
+  "domain": "chenoweth_menu",
+  "name": "Chenoweth Elementary Menu",
+  "version": "1.0.0",
+  "config_flow": true,
+  "documentation": "https://github.com/your-repo/chenoweth_menu",
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "single_config_entry": true,
+  "codeowners": []
+}

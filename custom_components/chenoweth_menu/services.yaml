@@ -1,0 +1,8 @@
+sync_menu:
+  name: Sync menu
+  description: >
+    Fetches the current and upcoming week's breakfast and lunch menus from the
+    JCPS Nutrislice API and writes them as events to the configured calendar
+    entity.  Call this from a Home Assistant automation on whatever schedule
+    you prefer (e.g. Sunday evening, or Monday morning).
+  fields: {}

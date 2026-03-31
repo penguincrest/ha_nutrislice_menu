@@ -1,0 +1,26 @@
+{
+  "title": "Chenoweth Elementary Menu",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Chenoweth Elementary Menu Setup",
+        "description": "Choose the calendar where menu events will be created. A **Local Calendar** named *School Menu* works well – create one in Settings → Integrations → Local Calendar if you haven't already.",
+        "data": {
+          "calendar_entity": "Calendar entity"
+        },
+        "data_description": {
+          "calendar_entity": "The HA calendar entity that will receive a menu event for each school day."
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Chenoweth Menu is already configured."
+    }
+  },
+  "services": {
+    "sync_menu": {
+      "name": "Sync menu",
+      "description": "Fetches the latest breakfast and lunch menus from Nutrislice and writes them as events to the configured calendar. Call this from an automation on whatever schedule you prefer."
+    }
+  }
+}
