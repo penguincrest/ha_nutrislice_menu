@@ -1,0 +1,37 @@
+# ─── Lovelace dashboard card ────────────────────────────────────────────────
+# Paste this into your dashboard via Edit → Add Card → Manual (YAML).
+# Uses the two sensor entities created by the integration.
+
+type: vertical-stack
+title: "🏫 Chenoweth Menu"
+cards:
+  - type: markdown
+    title: "🍳 Today's Breakfast"
+    content: >
+      {% set items = state_attr('sensor.chenoweth_breakfast_today', 'items') %}
+      {% if items %}
+        {% for item in items %}
+          - **{{ item.name }}**
+          {% if item.image %} ![]( {{- item.image -}} ){width=80} {% endif %}
+        {% endfor %}
+      {% else %}
+        _No breakfast data – run the sync_menu service to populate._
+      {% endif %}
+
+  - type: markdown
+    title: "🥗 Today's Lunch"
+    content: >
+      {% set items = state_attr('sensor.chenoweth_lunch_today', 'items') %}
+      {% if items %}
+        {% for item in items %}
+          - **{{ item.name }}**
+          {% if item.image %} ![]( {{- item.image -}} ){width=80} {% endif %}
+        {% endfor %}
+      {% else %}
+        _No lunch data – run the sync_menu service to populate._
+      {% endif %}
+
+  - type: calendar
+    entities:
+      - calendar.school_menu   # ← update if you used a different entity
+    initial_view: dayGridWeek

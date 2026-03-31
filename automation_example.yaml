@@ -1,0 +1,47 @@
+# ─── Example automation ─────────────────────────────────────────────────────
+# Calls chenoweth_menu.sync_menu on your preferred schedule.
+# Import via Settings → Automations → + → Import or paste directly.
+
+- alias: "Chenoweth – Sync menu (Sunday evening)"
+  id: chenoweth_sync_sunday
+  trigger:
+    - platform: time
+      at: "20:00:00"
+  condition:
+    - condition: time
+      weekday: [sun]
+  action:
+    - service: chenoweth_menu.sync_menu
+
+- alias: "Chenoweth – Sync menu (Monday morning backup)"
+  id: chenoweth_sync_monday
+  trigger:
+    - platform: time
+      at: "06:00:00"
+  condition:
+    - condition: time
+      weekday: [mon]
+  action:
+    - service: chenoweth_menu.sync_menu
+
+# ─── Optional morning notification ──────────────────────────────────────────
+# Replace notify.mobile_app_YOUR_PHONE with your actual notify target.
+
+- alias: "Chenoweth – Morning menu notification"
+  id: chenoweth_morning_notify
+  trigger:
+    - platform: time
+      at: "07:15:00"
+  condition:
+    - condition: time
+      weekday: [mon, tue, wed, thu, fri]
+  action:
+    - service: notify.mobile_app_YOUR_PHONE
+      data:
+        title: "🏫 Chenoweth Menu Today"
+        message: >
+          🍳 {{ states('sensor.chenoweth_breakfast_today') }}
+
+          🥗 {{ states('sensor.chenoweth_lunch_today') }}
+        data:
+          image: "{{ state_attr('sensor.chenoweth_lunch_today', 'hero_image') }}"
